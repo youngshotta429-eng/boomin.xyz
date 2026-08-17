@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B4byblu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      height: 100vh;
+      background: #000;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Background Video */
+    .bg-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      filter: brightness(0.6);
+    }
+
+    /* Click to Enter Overlay */
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #050505;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+    }
+
+    #overlay h2 {
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Bio Card */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 90%;
+      max-width: 400px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: rgba(15, 15, 18, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 35px 25px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .card::-webkit-scrollbar {
+      width: 4px;
+    }
+    .card::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+
+    .username {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .location {
+      font-size: 0.8rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .bio {
+      font-size: 0.95rem;
+      color: #bbb;
+      margin-bottom: 25px;
+    }
+
+    /* Social Links */
+    .links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .link-btn i {
+      font-size: 1.3rem;
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+    }
+
+    /* Larger Glowing Custom Icons */
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85)) brightness(1.2);
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
+
+    .link-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .link-btn:hover .btn-icon {
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1)) brightness(1.4);
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Video with Audio -->
+  <video class="bg-video" id="bg-video" loop playsinline>
+    <source src="https://files.catbox.moe/8smxde.mov" type="video/quicktime">
+    <source src="https://files.catbox.moe/8smxde.mov" type="video/mp4">
+  </video>
+
+  <!-- Entry Screen -->
+  <div id="overlay" onclick="enterSite()">
+    <h2>[ Click to Enter ]</h2>
+  </div>
+
+  <!-- Bio Card -->
+  <div class="card">
+    <img src="https://files.catbox.moe/ogvdwa.jpg" alt="Profile Picture" class="avatar">
+    
+    <div class="username">B4byblu</div>
+    <div class="location">📍 Metro M, PH</div>
+    <div class="bio">Exclusives Only Ent</div>
+
+    <div class="links-container">
+      <a href="https://instagram.com/bigglory.boomin" target="_blank" class="link-btn">
+        <i class="fa-brands fa-instagram"></i> Instagram
+      </a>
+      <a href="https://www.facebook.com/kiefer.dejesus.52" target="_blank" class="link-btn">
+        <i class="fa-brands fa-facebook"></i> Facebook
+      </a>
+      <a href="https://discord.gg/kcBpKncJv" target="_blank" class="link-btn">
+        <i class="fa-brands fa-discord"></i> 322 flyshits
+      </a>
+
+      <!-- Hooligans Youth -->
+      <a href="https://hooligansyouth.com/?srsltid=AfmBOorfki-oYpTL9Wpkrkpq_vNzM1PCE-LNSBy0XfsKA23S0BpHmMXI" target="_blank" class="link-btn">
+        <img src="https://files.catbox.moe/u87zsu.png" alt="Hooligans Youth Logo" class="btn-icon">
+        Hooligans Youth
+      </a>
+
+      <!-- Origin Manila -->
+      <a href="https://originmanila.com/" target="_blank" class="link-btn">
+        <img src="https://files.catbox.moe/nc5emt.png" alt="Origin Manila Logo" class="btn-icon">
+        Origin Manila
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function enterSite() {
+      const overlay = document.getElementById('overlay');
+      const video = document.getElementById('bg-video');
+      
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 500);
+
+      video.muted = false;
+      video.play().catch(() => {
+        console.log("Autoplay blocked");
+      });
+    }
+  </script>
+
+</body>
+</html>
